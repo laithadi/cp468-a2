@@ -61,4 +61,8 @@ def revise(SUDOKU, Xi, Xm):
             revised = True
     return revised
 
-def best_val(SUDOKU, Xi)
+def best_val(SUDOKU, Xi):
+
+
+
+return
