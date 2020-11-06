@@ -1,3 +1,10 @@
+from readingInput import readInputTxtFile
+from temp import createCell  
+
+SUDOKU = readInputTxtFile() 
+CELLS = createCell(SUDOKU)
+
+
 def AC3(csp):
     
     """ 
