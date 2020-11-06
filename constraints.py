@@ -1,9 +1,4 @@
-from readingInput import readInputTxtFile
-from temp import createCell  
 
-SUDOKU = readInputTxtFile() 
-
-CELLS = createCell(SUDOKU)
 
 def con_rows(cells):
 
