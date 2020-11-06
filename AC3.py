@@ -23,12 +23,17 @@ def AC3(csp):
     while queue:
         Xi,Xm = cell_queue.pop(0)
 
-        revise(SUDOKU, Xi, Xm):
+        if revise(SUDOKU, Xi, Xm):
     
-        if len(Xi.domain) == 1:
-            "Set the value of this cell to the value left in the domain"
-            Xi.value = Xi.domain[1]
-    
+            if len(Xi.domain) == 0:
+                return False
+
+            """ for Xk in csp.related_cells[xi]:
+                    if Xk != xi:
+                        queue.append((Xk, xi))
+            Still trying to figure out what the related_cells function does
+            """
+    return True
     """ 
     If you can think of any possible ideas for what else we would need to check 
     inside of the AC3 algo, just leave it here
@@ -52,7 +57,8 @@ def revise(SUDOKU, Xi, Xm):
 
     for dom in cell_queue[Xi]:
         if not any("constraints() in SUDOKU.domain[Xm]"):
-            SUDOKU.domain[Xm].remove(dom)
+            SUDOKU.domain[Xi].remove(dom)
             revised = True
-    Xi.value = Xi.domain[1]
     return revised
+
+def best_val(SUDOKU, Xi)
