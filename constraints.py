@@ -1,6 +1,57 @@
+def row_con(cells, cell, di):
+    
+    cell_r = cell.index[0]
+    cell_c = cell.index[1]
+    cell_v = cell.value
+
+    return 
 
 
-def con_rows(cells):
+
+
+
+def col_con(cells, cell, di):
+    pass
+
+
+
+def box(cells, cell, di):
+    pass
+
+
+
+def constraints(cells, cell, di):
+
+    if (not row_con(cells, cell, di)) or (not col_con(cells, cell, di)) or (not box_con(cells, cell, di)): return False
+
+    return True 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def c1on_rows(cells):
 
     for cell in cells:
         
@@ -15,7 +66,7 @@ def con_rows(cells):
     return True 
 
 
-def con_cols(cells):
+def c1on_cols(cells):
 
     for cell in cells:
 
