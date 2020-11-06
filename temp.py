@@ -27,7 +27,6 @@ def createCell(sudoku):
 
 
 
-
 # def getInputInd():
 #     """
 #     returns a tuple of indices (i,j) for cells with a given value from input.txt 
