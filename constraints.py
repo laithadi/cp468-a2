@@ -1,5 +1,3 @@
-# hi there friends
-
 def row_con(cells, cell, di):
     
     cell_r = cell.index[0]
