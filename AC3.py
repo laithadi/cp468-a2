@@ -21,9 +21,9 @@ def AC3(csp):
 
     return
     while queue:
-        Xi,Xm = cell_queue.pop(0)
+        Xi = cell_queue.pop(0)
 
-        if revise(SUDOKU, Xi, Xm):
+        if revise(SUDOKU, Xi):
     
             if len(Xi.domain) == 0:
                 return False
@@ -43,7 +43,7 @@ def AC3(csp):
 
     
 
-def revise(SUDOKU, Xi, Xm):
+def revise(SUDOKU, Xi):
     """
     Takes the current cell popped from the sudoku board, 
     makes a list of values from the domain of the cell.
@@ -55,7 +55,7 @@ def revise(SUDOKU, Xi, Xm):
 
     revised = False
 
-    for dom in cell_queue[Xi]:
+    for dom in Xi.domain:
         if not any("constraints() in SUDOKU.domain[Xm]"):
             SUDOKU.domain[Xi].remove(dom)
             revised = True
