@@ -5,7 +5,13 @@ from cell import Cell
 SUDOKU = readInputTxtFile() 
 CELLS = createCell(SUDOKU)
 
+cell_queue = []
+    for cell in CELLS.keys:
+        cell_queue.append(CELLS[cell])
 
+cell_queue_copy = []
+    for cell in CELLS.keys:
+        cell_queue.append(CELLS[cell])
 
 def AC3(csp):
     
@@ -15,15 +21,13 @@ def AC3(csp):
     otherwise True
     
     """
-    cell_queue = []
-    for cell in CELLS.keys:
-        cell_queue.append(CELLS[cell])
+    
 
     return
     while queue:
         Xi = cell_queue.pop(0)
 
-        if revise(SUDOKU, Xi):
+        if revise(cell_queue, Xi):
     
             if len(Xi.domain) == 0:
                 return False
@@ -43,7 +47,7 @@ def AC3(csp):
 
     
 
-def revise(SUDOKU, Xi):
+def revise(cell_queue, Xi):
     """
     Takes the current cell popped from the sudoku board, 
     makes a list of values from the domain of the cell.
@@ -56,8 +60,8 @@ def revise(SUDOKU, Xi):
     revised = False
 
     for dom in Xi.domain:
-        if not any("constraints() in SUDOKU.domain[Xm]"):
-            SUDOKU.domain[Xi].remove(dom)
+        if not constraints(cell_queue, xi, dom)
+            cell_queue.domain[Xi].remove(dom)
             revised = True
     return revised
 
