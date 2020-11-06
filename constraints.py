@@ -1,3 +1,5 @@
+# hi there friends
+
 def row_con(cells, cell, di):
     
     cell_r = cell.index[0]
@@ -5,9 +7,6 @@ def row_con(cells, cell, di):
     cell_v = cell.value
 
     return 
-
-
-
 
 
 def col_con(cells, cell, di):
