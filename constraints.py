@@ -1,4 +1,6 @@
-# hi friend
+BOX1 = [(0,0),(0,1),(0,2),
+        (1,0),(1,1),()] 
+
 
 def row_con(cells, cell, di):
     
@@ -6,16 +8,32 @@ def row_con(cells, cell, di):
     cell_c = cell.index[1]
     cell_v = cell.value
 
-    return 
+    for n_cell in cells:
+        if n_cell.index[0] == cell_r and n_cell.index[1] != cell_c:
+            if n_cell.value == cell_v:
+                return False  
+
+    return True 
 
 
 def col_con(cells, cell, di):
-    pass
+    
+    cell_r = cell.index[0]
+    cell_c = cell.index[1]
+    cell_v = cell.value
+
+    for n_cell in cells:
+        if n_cell.index[1] == cell_c and n_cell.index[0] != cell_r:
+            if n_cell.value == cell_v:
+                return False 
+    
+    return True 
 
 
 
-def box(cells, cell, di):
-    pass
+def box_con(cells, cell, di):
+    
+    return True 
 
 
 
