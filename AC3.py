@@ -1,17 +1,18 @@
 from readingInput import readInputTxtFile
 from temp import createCell  
 from cell import Cell
+from constraints import constraints
 
 SUDOKU = readInputTxtFile() 
 CELLS = createCell(SUDOKU)
 
 cell_queue = []
-    for cell in CELLS.keys:
-        cell_queue.append(CELLS[cell])
+for cell in CELLS.keys():
+    cell_queue.append(CELLS[cell])
 
 cell_queue_copy = []
-    for cell in CELLS.keys:
-        cell_queue.append(CELLS[cell])
+for cell in CELLS.keys():
+    cell_queue.append(CELLS[cell])
 
 def AC3(csp):
     
@@ -23,8 +24,8 @@ def AC3(csp):
     """
     
 
-    return
-    while queue:
+    # return
+    while cell_queue:
         Xi = cell_queue.pop(0)
 
         if revise(cell_queue, Xi):
@@ -38,14 +39,12 @@ def AC3(csp):
             Still trying to figure out what the related_cells function does
             """
     return True
-    """ 
-    If you can think of any possible ideas for what else we would need to check 
-    inside of the AC3 algo, just leave it here
-    """
 
-        
+    # If you can think of any possible ideas for what else we would need to check 
+    # inside of the AC3 algo, just leave it here
 
-    
+    # MAKE SURE TO UPDATE THE CELL_QUEUE WITH THE RIGHT DOMAINS AFTER REVISE()
+
 
 def revise(cell_queue, Xi):
     """
@@ -60,13 +59,12 @@ def revise(cell_queue, Xi):
     revised = False
 
     for dom in Xi.domain:
-        if not constraints(cell_queue, xi, dom)
+        if not constraints(cell_queue, Xi, dom):
             cell_queue.domain[Xi].remove(dom)
             revised = True
     return revised
 
+
 def best_val(SUDOKU, Xi):
 
-
-
-return
+    return
