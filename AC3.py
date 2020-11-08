@@ -33,11 +33,16 @@ def AC3(csp):
             if len(Xi.domain) == 0:
                 return False
 
-            """ for Xk in csp.related_cells[xi]:
-                    if Xk != xi:
-                        queue.append((Xk, xi))
-            Still trying to figure out what the related_cells function does
+            for X in Xi.domain:
+                if X != xi.domain[X]:
+                    cell_queue.append(Xi.domain[X])
+            """ 
+            This is here so that it will append the next value in domain,
+            such that X != a value in the domain.
+            Not sure if this is proper yet.
             """
+
+
     return True
 
     # If you can think of any possible ideas for what else we would need to check 
@@ -65,6 +70,3 @@ def revise(cell_queue, Xi):
     return revised
 
 
-def best_val(SUDOKU, Xi):
-
-    return
