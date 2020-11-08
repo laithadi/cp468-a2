@@ -28,7 +28,7 @@ def AC3(csp):
     while cell_queue:
         Xi = cell_queue.pop(0)
 
-        if revise(cell_queue, Xi):
+        if revise(cell_queue_copy, Xi):
     
             if len(Xi.domain) == 0:
                 return False
@@ -64,7 +64,7 @@ def revise(cell_queue, Xi):
     revised = False
 
     for dom in Xi.domain:
-        if not constraints(cell_queue, Xi, dom):
+        if not constraints(cell_queue_copy, Xi, dom):
             cell_queue.domain[Xi].remove(dom)
             revised = True
     return revised
