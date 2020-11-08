@@ -34,7 +34,7 @@ def AC3(csp):
                 return False
 
             for X in Xi.domain:
-                if X != xi.domain[X]:
+                if X != Xi.domain[X]:
                     cell_queue.append(Xi.domain[X])
             """ 
             This is here so that it will append the next value in domain,
