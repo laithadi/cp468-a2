@@ -16,15 +16,23 @@ def backtrackCSP(answer, CSP):
 
     # If not solved, we have to now choose a cell to test
     cell = select_variable(answer, CSP)
+
     for val in order_values(CSP, cell):
+        print(val)
+        print('------------------------------------')
         if constraint_check(CSP, answer, cell, val):
+            print(constraint_check(CSP, answer, cell, val))
+            print('------------------------------------')
             assign(CSP, cell, val, answer)
             result = backtrackCSP(answer, CSP)
+            print('result', result)
+            print('------------------------------------')
 
-            if result == True:
+            if result:
                 return result
             
             unassign(CSP, cell, answer)
+            # print("heloooo")
 
 
     return False
