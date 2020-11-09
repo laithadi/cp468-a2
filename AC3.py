@@ -12,7 +12,7 @@ CELLS = createCell(SUDOKU)
 
 
     
-def AC3(CSP, Queue):
+def AC3(CSP, Queue = None):
     
     """ 
     Uses the CSP or arc consistency to check each individual constraint.

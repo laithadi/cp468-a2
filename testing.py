@@ -3,30 +3,54 @@ from backtrack import backtrackCSP
 from constraints import CSP
 from temp import SUDOKU
 
-def main():
+def solve(grid, index, total):
+    
+    print("\nSudoku {}/{} : \n{}".format(index, total, print_grid(grid)))
 
 
-    cons = CSP(Sudoku)
-    result = AC3(cons)
+    print("{}/{} : AC3 starting".format(index, total))
 
-    if result is True:
-        #for cells in cons.cells:
-            
+
+    # instanciate Sudoku
+    cons = Sudoku(grid)
+
+    # launch AC-3 algorithm of it
+    AC3_result = AC3(cons)
+
+    # Sudoku has no solution
+    if not AC3_result:
+        print("{}/{} : this sudoku has no solution".format(index, total))
+
     else:
-        answer = {}
+        
+        # check if AC-3 algorithm has solve the Sudoku
+        if cons.isFinished():
 
-        for cell in cons.cells:
-            if len(cons.possibilities) == 1:
-                answer[cell] = cons.possibilities[cell]
-        answer = backtrackCSP(answer, cons)
+            print("{}/{} : AC3 was enough to solve this sudoku !".format(index,total))
+            print("{}/{} : Result: \n{}".format(index, total, cons))
 
-        for cell in cons.possibilities:
-            if len(cell) > 1:
-                cons.possibilities[cell] = answer[cell]
-            else:
-                cons.possibilities[cell]
-
-        if answer == True:
-            return "print table"
+        # continue the resolution
         else:
-            return "not solvable"
+
+            print("{}/{} : AC3 finished, Backtracking starting...".format(index,total))
+
+            assignment = {}
+
+            # for the already known values
+            for cell in cons.cells:
+
+                if len(cons.possibilities[cell]) == 1:
+                    assignment[cell] = cons.possibilities[cell][0]
+            
+            # start backtracking
+            assignment = backtrackCSP(assignment, cons)
+            
+            # merge the computed values for the cells at one place
+            for cell in cons.possibilities:
+                cons.possibilities[cell] = assignment[cell] if len(cell) > 1 else cons.possibilities[cell]
+            
+            if assignment:
+                print("{}/{} : Result: \n{}".format(index, total, cons))
+
+            else:
+                print("{}/{} : No solution exists".format(index, total))
