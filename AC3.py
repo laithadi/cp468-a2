@@ -14,6 +14,8 @@ cell_queue_copy = []
 for cell in CELLS.keys():
     cell_queue.append(CELLS[cell])
 
+reviced_cells = [] 
+
 def AC3(csp):
     
     """ 
@@ -22,20 +24,25 @@ def AC3(csp):
     otherwise True
     
     """
-    
 
     # return
     while cell_queue:
         Xi = cell_queue.pop(0)
+        revise(cell_queue_copy, Xi)
+        reviced_cells.append(Xi)
 
-        if revise(cell_queue_copy, Xi):
     
-            if len(Xi.domain) == 0:
-                return False
+        # if len(Xi.domain) == 0: # checks if its solvable 
+        #     return False
 
-            for X in Xi.domain:
-                if X != Xi.domain[X]:
-                    cell_queue.append(Xi.domain[X])
+
+        # Xi.value = Xi.domain[0]
+
+    
+        # for X in Xi.domain:
+        #     if X != Xi.value:
+        #         cell_queue.append(Xi.domain[X])
+
             """ 
             This is here so that it will append the next value in domain,
             such that X != a value in the domain.
@@ -65,8 +72,40 @@ def revise(cell_queue, Xi):
 
     for dom in Xi.domain:
         if not constraints(cell_queue_copy, Xi, dom):
-            cell_queue.domain[Xi].remove(dom)
+            Xi.domain.remove(dom)
             revised = True
     return revised
 
 
+assignment = [] 
+
+def rec_back_algo(reviced_cells, assignment):
+
+    if len(assignment) == len(reviced_cells):
+        return assignment 
+    
+    cell = None 
+
+    while cell == None:
+        reviced_cells[i].value == '':
+            cell = reviced_cells[i]
+
+    for di in cell.domain:
+
+        if constraints(reviced_cells, cell, di):
+
+            cell.value = di 
+            assignment.append(cell)
+            
+            
+        
+            result = rec_back_algo(reviced_cells, assignment)
+
+            if result:
+                return result 
+            
+            cell.value = '' 
+            assignment.remove(cell)
+
+            
+    return False
