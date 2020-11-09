@@ -9,6 +9,8 @@ def solve(sudoku):
     
     # print("\nSudoku {}/{} : \n".format(index, total))
 
+    # PRINT THE START OF THE SUDOKU 
+
 
     # print("{}/{} : AC3 starting".format(index, total))
 
@@ -32,7 +34,7 @@ def solve(sudoku):
         if cons.completed():
 
             # print("{}/{} : AC3 was enough to solve this sudoku !".format(index,total))
-
+             
             # print("{}/{} : Result: \n{}".format(index, total, cons))
             print("COMPLETED")
 
@@ -59,6 +61,7 @@ def solve(sudoku):
             
             if assignment:
                 # print("{}/{} : Result: \n{}".format(index, total, cons))
+                # SOLVED PRINT OUT THE RESULT SUDOKU HEREEEEE
                 print("wbalabalf")
 
             else:
