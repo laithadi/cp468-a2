@@ -3,10 +3,10 @@ def readInputTxtFile():
     f = open("input.txt", "r")
     lines = f.readlines()
 
-    sudoku = []
+    sudoku = ''
 
     for line in lines:
         temp = line.split(',')
-        sudoku.append(temp)
+        sudoku += str(temp)
 
     return sudoku
