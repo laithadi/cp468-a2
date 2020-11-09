@@ -1,122 +1,124 @@
-BOX1 = [(0,0),(0,1),(0,2),
-        (1,0),(1,1),(1,2),
-        (2,0),(2,1), (2,2)] 
+import itertools
 
-BOX2 = [(0,3),(0,4),(0,5),
-        (1,3),(1,4),(1,5),
-        (2,3),(2,4), (2,5)] 
-
-BOX3 = [(0,6),(0,7),(0,8),
-        (1,6),(1,7),(1,8),
-        (2,6),(2,7), (2,8)] 
-
-BOX4 = [(3,0),(3,1),(3,2),
-        (4,0),(4,1),(4,2),
-        (5,0),(5,1), (5,2)] 
-
-BOX5 = [(3,3),(3,4),(3,5),
-        (4,3),(4,4),(4,5),
-        (5,3),(5,4), (5,5)] 
-
-BOX6 = [(3,6),(3,7),(3,8),
-        (4,6),(4,7),(4,8),
-        (5,6),(5,7), (5,8)]
-
-BOX7 = [(6,0),(6,1),(6,2),
-        (7,0),(7,1),(7,2),
-        (8,0),(8,1), (8,2)] 
-
-BOX8 = [(6,3),(6,4),(6,5),
-        (7,3),(7,4),(7,5),
-        (8,3),(8,4), (8,5)] 
- 
-BOX9 = [(6,6),(6,7),(6,8),
-        (7,6),(7,7),(7,8),
-        (8,6),(8,7), (8,8)] 
+COLUMNS = "ABCDEFGHI"
+ROWS = "123456789"
 
 
-def row_con(cells, cell, di):
-    
-    cell_r = cell.index[0]
-    cell_c = cell.index[1]
-    cell_v = cell.value
+class CSP:
 
-    for n_cell in cells:
-        if n_cell.index[0] == cell_r and n_cell.index[1] != cell_c:
-            if n_cell.value == cell_v:
-                return False  
+    def __init__(self, sudoku):
 
-    return True 
+        # game = list(sudoku)
 
+        self.cells = list() 
+        self.domains = dict()
+        self.b_constraints = list() 
+        self.neighbor_cells = dict() 
+        self.pruned = dict()
 
-def col_con(cells, cell, di):
-    
-    cell_r = cell.index[0]
-    cell_c = cell.index[1]
-    cell_v = cell.value
-
-    for n_cell in cells:
-        if n_cell.index[1] == cell_c and n_cell.index[0] != cell_r:
-            if n_cell.value == cell_v:
-                return False 
-    
-    return True 
+        self.cells = self.create_coords()
+        self.possibilities = self.create_domain(sudoku)  
+        constraints = self.create_constraints()
+        self.b_constraints = self.create_b_constraints(constraints)
+        self.neighbor_cells = self.create_neighbors()
+        self.pruned = {v: list() if sudoku[i] == '0' else [int(sudoku[i])] for i, v in enumerate(self.cells)}
 
 
 
-def check_box(cells, cell, di, box):
+    def completed(self):
 
-    for n_cell in cells:
-        if n_cell.index in box:
-            if n_cell.value == cell.value:
+        for c, p in self.possibilities.items():
+            if len(p) > 1:
                 return False 
 
-    return True 
-
-
-def box_con(cells, cell, di):
+        return True 
     
-    if cell.index in BOX1:
-        return check_box(cells, cell, di, BOX1)
+
+    def create_coords(self):
+
+        coords_all_cells = [] 
+
+        for letter in COLUMNS: 
+            for num in ROWS:
+                temp = letter + num 
+                coords_all_cells.append(temp)
+
+        return coords_all_cells
     
-    if cell.index in BOX2:
-        return check_box(cells, cell, di, BOX2)
 
-    if cell.index in BOX3:
-        return check_box(cells, cell, di, BOX3)
+    def create_domain(self, sudoku):
 
-    if cell.index in BOX4:
-        return check_box(cells, cell, di, BOX4)
+        ls_sudoku = list(sudoku)
 
-    if cell.index in BOX5:
-        return check_box(cells, cell, di, BOX5)
+        poss = {} 
 
-    if cell.index in BOX6:
-        return check_box(cells, cell, di, BOX6)
+        for ind, coord in enumerate(self.cells):
 
-    if cell.index in BOX7:
-        return check_box(cells, cell, di, BOX7)
+            if ls_sudoku[ind] == '':
+                poss[coord] = [1,2,3,4,5,6,7,8,9]
 
-    if cell.index in BOX8:
-        return check_box(cells, cell, di, BOX8)
+            else:
+                poss[coord] = [int(ls_sudoku[ind])]
 
-    if cell.index in BOX9:
-        return check_box(cells, cell, di, BOX9)
+        return poss
 
+    
+    def create_constraints(self):
 
-def constraints(cells, cell, di):
+        con_row, con_col, con_box = [],[],[] 
 
-    if (not row_con(cells, cell, di)) or (not col_con(cells, cell, di)) or (not box_con(cells, cell, di)): return False
+        for num in ROWS:
+            con_row.append([letter + num for letter in COLUMNS])
 
-    return True 
-
-
-
-
-
-
-neighbours = neighbours(cellA) # neighbours ===> (celB, cellc, sds )
-
-for cell in neighbours:
-    cell.value == cellA.value : 
+        for letter in COLUMNS:
+            con_col.append([letter + num for num in ROWS])
         
+        square_r = list(COLUMNS[i:i+3] for i in range(0, len(ROWS), 3))
+        square_c = list(ROWS[i:i+3] for i in range(0, len(COLUMNS), 3))
+
+        for row in square_r:
+            for col in square_c:
+
+                square_con = []
+
+                for i in row:
+                    for j in col:
+
+                        square_con.append(i+j)
+
+                con_box.append(square_con)
+
+        return con_row + con_col + con_box        
+
+
+    def create_b_constraints(self, constraints):
+
+        con_binary = [] 
+
+        for constraint in constraints:
+
+            temp = [] 
+
+            for c in itertools.permutations(constraint, 2):
+                temp.append(c) 
+            
+            for b_c in temp:
+                ls_con = list(b_c)
+
+                if ls_con not in con_binary:
+                    con_binary.append([b_c[0], b_c[1]])
+        
+        return con_binary
+
+    
+    def create_neighbors(self):
+
+        neighbors = {} 
+
+        for cell in self.cells:
+            neighbors[cell] = [] 
+            for con in self.b_constraints:
+                if cell == con:
+                    neighbors[cell].append(con[1])
+
+        return neighbors
