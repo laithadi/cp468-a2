@@ -109,3 +109,14 @@ def constraints(cells, cell, di):
     if (not row_con(cells, cell, di)) or (not col_con(cells, cell, di)) or (not box_con(cells, cell, di)): return False
 
     return True 
+
+
+
+
+
+
+neighbours = neighbours(cellA) # neighbours ===> (celB, cellc, sds )
+
+for cell in neighbours:
+    cell.value == cellA.value : 
+        
