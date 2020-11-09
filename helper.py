@@ -37,3 +37,8 @@ def forward_check(CSP, cell, value, answer):
                 CSP.possibilities[neighbour].remove(value)
                 CSP.pruned[cell].append((neighbour, value))
     return
+
+def is_diff(cell_a, cell_b):
+    if cell_a != cell_b:
+        return True
+    return False

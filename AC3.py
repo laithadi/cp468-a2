@@ -2,6 +2,7 @@ from readingInput import readInputTxtFile
 from temp import createCell  
 from cell import Cell
 from constraints import CSP
+from helper import is_diff
 
 SUDOKU = readInputTxtFile() 
 CELLS = createCell(SUDOKU)
@@ -9,23 +10,6 @@ CELLS = createCell(SUDOKU)
 
 
 
-def revise(CSP, Xa, Xb):
-    """
-    Takes the current cell popped from the sudoku board, 
-    makes a list of values from the domain of the cell.
-    Checks each individual value in the domain with the constraints,
-    if the constraints are false, it will remove this value from the domain.
-    What is left is the viable options that can be chose at the specific cell
-    for the algorithm to try with.
-    """
-
-    revised = False
-
-    for val in CSP.possibilities[Xa]:
-        if not constraints("isdifferent or new name"(value,x) for x in "csp.posibilites"[Xb]:
-            CSP.possibilities[Xa].remove(value)
-            revised = True
-    return revised
 
     
 def AC3(CSP, Queue):
@@ -51,10 +35,25 @@ def AC3(CSP, Queue):
 
     return True
 
-    # If you can think of any possible ideas for what else we would need to check 
-    # inside of the AC3 algo, just leave it here
+def revise(CSP, Xa, Xb):
+    """
+    Takes the current cell popped from the sudoku board, 
+    makes a list of values from the domain of the cell.
+    Checks each individual value in the domain with the constraints,
+    if the constraints are false, it will remove this value from the domain.
+    What is left is the viable options that can be chose at the specific cell
+    for the algorithm to try with.
+    """
 
-    # MAKE SURE TO UPDATE THE CELL_QUEUE WITH THE RIGHT DOMAINS AFTER REVISE()
+    revised = False
+
+    for val in CSP.possibilities[Xa]:
+        if Xa != Xb:
+            if not any ([is_diff(val,x) for x in CSP.possibilities[Xb]]):
+                CSP.possibilities[Xa].remove(val)
+                revised = True
+    return revised
+
 
 
 
