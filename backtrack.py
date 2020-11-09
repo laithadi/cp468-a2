@@ -39,7 +39,9 @@ def select_variable(answer, CSP):
     return unchosen
 
 def order_values(CSP, cell):
-    if len(CSP.possibilites) == 1:
-        return CSP.possibilites[cell]
+    if len(CSP.possibilities) == 1:
+        return CSP.possibilities[cell]
     else:
-        return CSP.possibilites[0]
+        values = CSP.possibilities[cell]
+
+        return values[0]
