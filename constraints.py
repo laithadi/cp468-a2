@@ -8,7 +8,7 @@ class CSP:
 
     def __init__(self, sudoku):
 
-        # game = list(sudoku)
+        game = list(sudoku)
 
         self.cells = list() 
         self.domains = dict()
