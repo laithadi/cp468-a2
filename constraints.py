@@ -13,15 +13,15 @@ class CSP:
         self.cells = list() 
         self.domains = dict()
         self.b_constraints = list() 
-        self.neighbor_cells = dict() 
+        self.neighbour_cells = dict() 
         self.pruned = dict()
 
         self.cells = self.create_coords()
         self.possibilities = self.create_domain(sudoku)  
         constraints = self.create_constraints()
         self.b_constraints = self.create_b_constraints(constraints)
-        self.neighbor_cells = self.create_neighbors()
-        self.pruned = {v: list() if sudoku[i] == '0' else [int(sudoku[i])] for i, v in enumerate(self.cells)}
+        self.neighbour_cells = self.create_neighbours()
+        self.pruned = {v: list() if sudoku[i] == '-' else [int(sudoku[i])] for i, v in enumerate(self.cells)}
 
 
 
@@ -111,7 +111,7 @@ class CSP:
         return con_binary
 
     
-    def create_neighbors(self):
+    def create_neighbours(self):
 
         neighbors = {} 
 
