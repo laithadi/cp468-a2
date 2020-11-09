@@ -1,57 +1,15 @@
 from readingInput import readInputTxtFile
 from temp import createCell  
 from cell import Cell
-from constraints import constraints
+from constraints import CSP
 
 SUDOKU = readInputTxtFile() 
 CELLS = createCell(SUDOKU)
 
-cell_queue = []
-for cell in CELLS.keys():
-    cell_queue.append(CELLS[cell])
-
-cell_queue_copy = []
-for cell in CELLS.keys():
-    cell_queue.append(CELLS[cell])
-
-def AC3(csp):
-    
-    """ 
-    Uses the CSP or arc consistency to check each individual constraint.
-    Returns False if an inconsistency is found within the constraints, 
-    otherwise True
-    
-    """
-    
-
-    # return
-    while cell_queue:
-        Xi = cell_queue.pop(0)
-
-        if revise(cell_queue_copy, Xi):
-    
-            if len(Xi.domain) == 0:
-                return False
-
-            for X in Xi.domain:
-                if X != Xi.domain[X]:
-                    cell_queue.append(Xi.domain[X])
-            """ 
-            This is here so that it will append the next value in domain,
-            such that X != a value in the domain.
-            Not sure if this is proper yet.
-            """
 
 
-    return True
 
-    # If you can think of any possible ideas for what else we would need to check 
-    # inside of the AC3 algo, just leave it here
-
-    # MAKE SURE TO UPDATE THE CELL_QUEUE WITH THE RIGHT DOMAINS AFTER REVISE()
-
-
-def revise(cell_queue, Xi):
+def revise(CSP, Xa, Xb):
     """
     Takes the current cell popped from the sudoku board, 
     makes a list of values from the domain of the cell.
@@ -63,10 +21,42 @@ def revise(cell_queue, Xi):
 
     revised = False
 
-    for dom in Xi.domain:
-        if not constraints(cell_queue_copy, Xi, dom):
-            cell_queue.domain[Xi].remove(dom)
+    for val in CSP.possibilities[Xa]:
+        if not constraints("isdifferent or new name"(value,x) for x in "csp.posibilites"[Xb]:
+            CSP.possibilities[Xa].remove(value)
             revised = True
     return revised
+
+    
+def AC3(CSP, Queue):
+    
+    """ 
+    Uses the CSP or arc consistency to check each individual constraint.
+    Returns False if an inconsistency is found within the constraints, 
+    otherwise True
+    
+    """
+    if cspqueue == none:
+        cspqueue = list(CSP.b_constraints)
+    
+    while cspqueue != None:
+        (Xa,Xb) = cspqueue.pop()
+        if revise(CSP, Xa, Xb):
+            if len(CSP.possibilities[Xa])== 0:
+                return False
+
+        for cell in CSP.neighbour_cells[Xa]:
+            if cell != Xa:
+                cspqueue.append(cell, Xa)
+
+    return True
+
+    # If you can think of any possible ideas for what else we would need to check 
+    # inside of the AC3 algo, just leave it here
+
+    # MAKE SURE TO UPDATE THE CELL_QUEUE WITH THE RIGHT DOMAINS AFTER REVISE()
+
+
+
 
 
