@@ -20,7 +20,7 @@ def AC3(CSP, Queue):
     otherwise True
     
     """
-    if cspqueue == none:
+    if cspqueue == None:
         cspqueue = list(CSP.b_constraints)
     
     while cspqueue != None:

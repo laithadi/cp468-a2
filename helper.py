@@ -24,10 +24,9 @@ def unassign(CSP, cell, answer):
     if cell in answer:
         for(spot,value) in CSP.pruned(value):
             CSP.possibilities[spot].append(value)
-
         CSP.pruned[cell] = []
-
         del answer[cell]
+        
     return
 
 def forward_check(CSP, cell, value, answer):
