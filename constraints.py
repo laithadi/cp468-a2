@@ -122,3 +122,13 @@ class CSP:
                     neighbors[cell].append(con[1])
 
         return neighbors
+
+    def __str__(self):
+        s = ''
+        n = 0
+        for cell in self.cells:
+            s = s + self.cells[n] + ' '
+            n += 1
+            if n % 9 == 0:
+                s += '\n'
+        return s

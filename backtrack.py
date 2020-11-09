@@ -31,17 +31,12 @@ def backtrackCSP(answer, CSP):
 
 
 def select_variable(answer, CSP):
-    unchosen = []
 
     for cell in CSP.cells:
         if cell not in answer:
-            unchosen.append(cell)
-    return unchosen
+            return cell
+            
+    return 
 
 def order_values(CSP, cell):
-    if len(CSP.possibilities) == 1:
-        return CSP.possibilities[cell]
-    else:
-        values = CSP.possibilities[cell]
-
-        return values[0]
+    return CSP.possibilities[cell]

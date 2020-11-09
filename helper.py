@@ -22,7 +22,7 @@ def assign(CSP, cell, value, answer):
 
 def unassign(CSP, cell, answer):
     if cell in answer:
-        for(spot,value) in CSP.pruned(value):
+        for (spot,value) in CSP.pruned[cell]:
             CSP.possibilities[spot].append(value)
         CSP.pruned[cell] = []
         answer.pop(cell)
