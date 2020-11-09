@@ -1,45 +1,45 @@
 from readingInput import readInputTxtFile
 from temp import createCell  
 from cell import Cell
-from constraints import constraints
+from constraints import CSP
+from helper import constraint_check, assign, unassign
 
-
-def backtrackCSP(answer, SUDOKU):
+def backtrackCSP(answer, CSP):
     
     """
     Instantly checks if the length of our answer is equivalent to the
     amount of cells in SUDOKU, if true we have solved the puzzle
     """
 
-    if len(answer) == len("new name"):
+    if len(answer) == len(CSP.cells):
         return answer
 
     # If not solved, we have to now choose a cell to test
-    cell = select_variable(answer, SUDOKU)
-    for val in domain_ordered("New name", cell):
-        if "name for no constraints function"("new name", answer, val):
-            "new name for assign"("newname", cell, val, answer)
-            result = backtrackCSP(answer, "newname")
+    cell = select_variable(answer, CSP)
+    for val in domain_ordered(CSP, cell):
+        if constraint_check(CSP, answer, cell, val):
+            assign(CSP, cell, val, answer)
+            result = backtrackCSP(answer, CSP)
 
             if result == True:
                 return result
             
-            "new name for unassign"("newname", cell, answer)
+            unassign(CSP, cell, answer)
 
 
 return False
 
 
-def select_variable(answer, "newname"):
+def select_variable(answer, CSP):
     unchosen = []
 
-    for cell in "newname".cells:
+    for cell in CSP.cells:
         if cell not in answer:
             unchosen.append(cell)
     return unchosen
 
-def order_values("newname", cell):
-    if len("newname".possibilites) == 1
-        return "newname".possibilites[cell]
+def order_values(CSP, cell):
+    if len(CSP.possibilites) == 1
+        return CSP.possibilites[cell]
     else:
-        return "newname".possibilites[cell]
+        return CSP.possibilites[cell]
