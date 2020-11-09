@@ -9,7 +9,7 @@ def main():
     cons = CSP(Sudoku)
     result = AC3(cons)
 
-    if result == True:
+    if result is True:
         #for cells in cons.cells:
             
     else:

@@ -16,7 +16,7 @@ def backtrackCSP(answer, CSP):
 
     # If not solved, we have to now choose a cell to test
     cell = select_variable(answer, CSP)
-    for val in domain_ordered(CSP, cell):
+    for val in order_values(CSP, cell):
         if constraint_check(CSP, answer, cell, val):
             assign(CSP, cell, val, answer)
             result = backtrackCSP(answer, CSP)
@@ -27,7 +27,7 @@ def backtrackCSP(answer, CSP):
             unassign(CSP, cell, answer)
 
 
-return False
+    return False
 
 
 def select_variable(answer, CSP):
@@ -39,7 +39,7 @@ def select_variable(answer, CSP):
     return unchosen
 
 def order_values(CSP, cell):
-    if len(CSP.possibilites) == 1
+    if len(CSP.possibilites) == 1:
         return CSP.possibilites[cell]
     else:
-        return CSP.possibilites[cell]
+        return CSP.possibilites[0]
