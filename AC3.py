@@ -4,15 +4,12 @@ from cell import Cell
 from constraints import CSP
 from helper import is_diff
 
-SUDOKU = readInputTxtFile() 
-CELLS = createCell(SUDOKU)
-
 
 
 
 
     
-def AC3(CSP, Queue = None):
+def AC3(CSP, cspqueue = None):
     
     """ 
     Uses the CSP or arc consistency to check each individual constraint.
@@ -23,7 +20,7 @@ def AC3(CSP, Queue = None):
     if cspqueue == None:
         cspqueue = list(CSP.b_constraints)
     
-    while cspqueue != None:
+    while cspqueue:
         (Xa,Xb) = cspqueue.pop()
         if revise(CSP, Xa, Xb):
             if len(CSP.possibilities[Xa])== 0:
