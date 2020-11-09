@@ -54,7 +54,7 @@ class CSP:
 
         for ind, coord in enumerate(self.cells):
 
-            if ls_sudoku[ind] == '':
+            if ls_sudoku[ind] == '-':
                 poss[coord] = [1,2,3,4,5,6,7,8,9]
 
             else:
