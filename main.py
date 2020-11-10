@@ -6,14 +6,17 @@ from helper import readInputTxtFile
 SUDOKU = readInputTxtFile()
 
 def solve(sudoku):
+    print("The starting sudoku table \n")
     i = 0
     for char in sudoku:
         print(char + '  ', end='')
         i += 1
         if i % 9 == 0:
             print()
+
+    print("\n")
     
-    print("The starting sudoku table \n")
+    
     cons = CSP(sudoku)
     AC3_result = AC3(cons)
 
@@ -38,6 +41,7 @@ def solve(sudoku):
                 cons.possibilities[cell] = answer[cell] if len(cell) > 1 else cons.possibilities[cell]
             
             if answer:
+                print("Solved Puzzle:")
                 i = 0
                 for coord in answer:
                     print(str(answer[coord]) + '  ', end='')
