@@ -61,3 +61,12 @@ def is_diff(cell_a, cell_b):
     if cell_a != cell_b:
         return True
     return False
+
+def readInputTxtFile():
+
+    f = open("input.txt", "r")
+    
+    sudoku = f.read().replace(',', '')
+
+    return sudoku
+
