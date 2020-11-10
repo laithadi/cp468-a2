@@ -1,16 +1,8 @@
-from readingInput import readInputTxtFile
-from temp import createCell  
-from cell import Cell
+from helper import readInputTxtFile
 from constraints import CSP
 from helper import is_diff
 
-
-
-
-
-    
 def AC3(CSP, cspqueue = None):
-    
     """ 
     Uses the CSP or arc consistency to check each individual constraint.
     Returns False if an inconsistency is found within the constraints, 
