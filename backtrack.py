@@ -8,7 +8,14 @@ def backtrackCSP(answer, CSP):
     
     """
     Instantly checks if the length of our answer is equivalent to the
-    amount of cells in SUDOKU, if true we have solved the puzzle
+    amount of cells in SUDOKU.
+    if the nextvalue we are going to try has no constraints, it will be assigned.
+    If there are constraint issues, it will unassign cells,
+    reassign possibilities to the neighbouring cells,
+    and loop again.
+    
+    
+    If our length of answer quals the length of CSP cells, we have solved the puzzle.
     """
 
     if len(answer) == len(CSP.cells):
@@ -33,7 +40,9 @@ def backtrackCSP(answer, CSP):
 
 
 def select_variable(answer, CSP):
-
+"""
+Chooses the next possible variable from cells
+"""
     for cell in CSP.cells:
         if cell not in answer:
             return cell

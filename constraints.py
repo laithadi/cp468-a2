@@ -26,7 +26,9 @@ class CSP:
 
 
     def completed(self):
-
+    """
+    Checks if the length of possibilites is greater than 1, if so, return false.
+    """
         for c, p in self.possibilities.items():
             if len(p) > 1:
                 return False 
@@ -35,7 +37,10 @@ class CSP:
     
 
     def create_coords(self):
-
+    """
+    Creates all the coordinates within the SUDOKU puzzle
+    By appending the Col and Row 
+    """
         coords_all_cells = [] 
 
         for letter in COLUMNS: 
@@ -47,7 +52,11 @@ class CSP:
     
 
     def create_domain(self, sudoku):
+        """
+        Sets the possible set of values that each cell can have,
+        which are numbers 1-9
 
+        """
         ls_sudoku = list(sudoku)
 
         poss = {} 
@@ -64,6 +73,10 @@ class CSP:
 
     
     def create_constraints(self):
+        """
+        Goes through and creates each possible constraint that sudoku can have,
+        also known as the "arcs"
+        """
 
         con_row, con_col, con_box = [],[],[] 
 
@@ -92,7 +105,9 @@ class CSP:
 
 
     def create_b_constraints(self, constraints):
-
+        """
+        Converts all of teh constraints into tuples
+        """
         con_binary = [] 
 
         for constraint in constraints:
@@ -112,7 +127,11 @@ class CSP:
 
     
     def create_neighbours(self):
-
+        """
+        Creates a list of all cells that are "neighbours"
+        of the current cell. Neighbours are any value shared by the cell
+        in teh row column or box.
+        """
         neighbors = {} 
 
         for cell in self.cells:
@@ -124,6 +143,9 @@ class CSP:
         return neighbors
 
     def __str__(self):
+        """
+        prints each cell
+        """
         s = ''
         n = 0
         for cell in self.cells:
