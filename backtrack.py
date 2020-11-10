@@ -40,9 +40,11 @@ def backtrackCSP(answer, CSP):
 
 
 def select_variable(answer, CSP):
-"""
-Chooses the next possible variable from cells
-"""
+    """
+    Chooses the next possible variable from cells
+
+    """
+    
     for cell in CSP.cells:
         if cell not in answer:
             return cell
