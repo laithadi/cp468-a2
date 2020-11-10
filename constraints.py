@@ -28,6 +28,7 @@ class CSP:
     def completed(self):
         """
         Checks if the length of possibilites is greater than 1, if so, return false.
+        if less true, sudoku is solved
 
         """
         for c, p in self.possibilities.items():
