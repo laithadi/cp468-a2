@@ -44,7 +44,8 @@ def unassign(CSP, cell, answer):
 
 def forward_check(CSP, cell, value, answer):
     """
-    Reduces the amount of possibilites left for values to be chosen from.
+    Reduces the amount of possibilites left for values to be chosen from
+    due to cells in front of it.
     """
     for neighbour in CSP.neighbour_cells[cell]:
         if neighbour not in answer:
